@@ -24,21 +24,21 @@
 
 
 # Install all required packages.
-install.packages(c("ggplot2", "e1071", "caret", "quanteda", 
-                   "irlba", "randomForest")) 
+# install.packages(c("ggplot2", "e1071", "caret", "quanteda", 
+#                    "irlba", "randomForest")) 
 
 
 
 
 # Load up the .CSV data and explore in RStudio.
-spam.raw <- read.csv("spam.csv", stringsAsFactors = FALSE, fileEncoding = "UTF-16")
-View(spam.raw)
+spam.raw <- read.csv("C:/Users/siarkmi2/Documents/R/spam.csv", stringsAsFactors = FALSE)
+#View(spam.raw)
 
 
 # Clean up the data frame and view our handiwork.
 spam.raw <- spam.raw[, 1:2]
 names(spam.raw) <- c("Label", "Text")
-View(spam.raw)
+#View(spam.raw)
 
 
 
@@ -126,6 +126,7 @@ train$Text[357]
 # analytics. One of the newer packages in quanteda. The quanteda
 # package has many useful functions for quickly and easily working
 # with text data.
+library(Matrix)
 library(quanteda)
 help(package = "quanteda")
 
@@ -151,6 +152,10 @@ train.tokens <- tokens_select(train.tokens, stopwords(),
                               selection = "remove")
 train.tokens[[357]]
 
+
+require(devtools)
+library(devtools)
+devtools::install_github('topepo/caret/pkg/caret')
 
 # Perform stemming on the tokens.
 train.tokens <- tokens_wordstem(train.tokens, language = "english")
@@ -221,7 +226,7 @@ start.time <- Sys.time()
 
 
 # Create a cluster to work on 10 logical cores.
-cl <- makeCluster(10, type = "SOCK")
+cl <- makeCluster(2, type = "SOCK")
 registerDoSNOW(cl)
 
 

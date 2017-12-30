@@ -1,0 +1,2 @@
+packageurl <- "https://cran.r-project.org/src/contrib/Archive/stringi/stringi_1.1.2.tar.gz"
+install.packages(packageurl, repos=NULL, type="source")
